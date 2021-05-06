@@ -2,13 +2,13 @@
 
 require __DIR__.'/vendor/autoload.php';
 
+ 
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+$dotenv->load();
+
 use \App\Pix\Api;
 
-$obApiPix = new Api('https://api.itau.com.br/sandbox/pix_recebimentos', 
-                    '24bbabfe-5d8b-47a7-97f4-21d5b35b2828',
-                    '3c25c2bb-a626-42c9-86f4-8019241e2fef',
-                    'certificado');
-
+$obApiPix = new Api(getenv('BASE_URL_API_SANDBOX'), getenv('CLIENT_ID'), getenv('CLIENT_SECRET'), getenv('CERTIFICADO'));
 
 
 $response = $obApiPix->consultCob($txId);
